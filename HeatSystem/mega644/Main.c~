@@ -1,0 +1,192 @@
+#include <mega644p.h>
+
+//unsigned int sh1 = 0;                            //счетчик для цикла инициализации
+//unsigned int counter = 0, countIndicate = 0;     //счетчик промежуточного значения(АЦП); счетчик для индикатора
+//unsigned char dignum = 0, type = 0;              //номер отображаемой цифры; тип операции по прерыванию Т0
+//unsigned char zoomer = 0b01001110, ;             //величина зуммера
+//bit butt1 = 0, butt2 = 0, butt3=0;               //флаги для кнопок(3)
+
+
+/*interrupt [19] void OFTimer0(void)  //прерывание по переполнению таймера 0
+{
+   countIndicate++; 
+   if((type|0b11111110)==255)
+    if(countIndicate == 19)     
+    {
+       ShowOneDigit(D[dignum], A[10], C[10]);
+       if (dignum<3) dignum++; else dignum = 0;
+       countIndicate = 0;              
+    }   
+  
+} */
+
+
+//interrupt [14] void ComATimer1(void)  //прерывание по совпадению таймера 1
+//{
+//    TCNT1H = 0x00;
+//    TCNT1L = 0x00;         
+//    sh1++;
+//}
+
+//interrupt [25] void ADC(void)  //прерывание по окончанию АЦП
+//{
+//    //counter = ADCL + ADCH*256;
+//   // ADCSRA = 0b11001111; //Запуск АЦП (Частота делится на 128)
+//}
+//
+//interrupt [23] void UTX(void)  //прерывание по передачи USART
+//{
+//   //PORTD = PORTD&0b11111011;
+//   //UCSR0B = 0b10010000; //IntRX,IntTx,IntClear,RX,TX,Format2,RXbit.TXbit  
+//}
+//
+//interrupt [21] void URX(void)  //прерывание по приему USART
+//{
+//   //int a=UDR0;
+//  // PORTD = PORTD|0b00000100;
+//  // UCSR0B = 0b01001000; //IntRX,IntTx,IntClear,RX,TX,Format2,RXbit.TXbit
+//  // UDR0=a+1;
+//}
+                                              
+                                    
+void main(void)                                    
+{
+  
+    #asm("push r16"); 
+//  OCR1AH = 0b10011000;   
+//  OCR1AL = 0b10011001;                    
+//  TIMSK1 = 0b00000010;
+//  TCCR1A = 0b01000000;
+//  TCCR1B = 0b00000100;  
+  #asm("sei");   
+    
+    
+  //Запуск вспомогательного таймера 
+  //type |= 1<<0;    
+  //TIMSK0 = 0b00000001;
+  //TCCR0A = 0b00000000;
+  //TCCR0B = 0b00000101;  
+  
+  //Работа с ЛСД
+//  DDRB=0b00010011; 
+// // PORTB=0b00001100;
+//  DDRC=0b00011100; 
+//  PORTC=0b00000000;
+//  delay_us(250);
+  
+//  LCD_command(TwoLineSmallSimbols); 
+//  LCD_command(ImageON);
+//  LCD_command(clear);
+//  LCD_command(reset);
+  
+// //цикл инициализации                   
+// while(sh1<sh)
+//    {
+//      #asm("nop");
+//    }
+//
+//  TIMSK1 = 0x00;
+//  TCCR1A = 0x00;
+//  TCCR1B = 0x00;
+  
+       
+  //Управление светодиодом
+  #asm("nop"); 
+  DDRD =  (1<<5);
+  //PORTD = (1<<6)|(1<<5)|(1<<4)|(1<<3);
+  #asm("nop");
+ 
+  /* 
+  //Настройка USART
+   UCSR0A = 0x00;  //flags:RX,TX,Clear,erCadr,Over,erParity, Speed, Multy
+   UCSR0C = 0b00000110;//Mode1,Mode2,Parity,Stop,Format1,Format0, Takt 
+   UBRR0H = 0x00;
+   UBRR0L = 0b10000001;
+  
+   DDRD =  DDRD|0b00000100;
+   PORTD = PORTD&0b11111011;
+   UCSR0B = 0b10010000; //IntRX,IntTx,IntClear,RX,TX,Format2,RXbit.TXbit
+   //PORTD = PORTD|0b00000100;
+   //UCSR0B = 0b01001000;
+   //UDR0=0x11;    
+  
+  */
+    
+    
+  //Инициализация аналогого компаратора
+  // ACSR = 0b10000000;
+  
+  //Инициализация АЦП
+  // DIDR0 = 1;
+   //ADMUX = 0b01000000;
+   //ADCSRA= 0b11001111; //Запуск АЦП (Частота делится на 128)
+   
+while (1)
+    {
+      /* if (PIND.6)
+        { PORTD |= 1<<5;}
+       else
+        {
+           PORTD &= ~(1<<5);
+           butt3 =~butt3;
+        } 
+        
+                       
+       if (PIND.3)
+        {
+           butt1=0;
+        }
+        else
+        {  
+          delay_ms(60);
+          if (~PIND.3)
+           {
+             //if(butt1==1) delay_ms(300); 
+             counter++; 
+             butt1=1;
+           }
+           else
+           {
+              butt1=0;
+           }
+        }
+        
+        
+        if (PIND.4)
+        {
+           butt2=0;
+        }
+        else
+        { 
+          delay_ms(60); 
+          if (~PIND.4)
+          {
+            //if(butt2==1) delay_ms(300);
+            if(counter>0)counter--;
+            butt2=1;
+          }
+          else
+          {
+            butt2=0;
+          }
+        }
+        
+        
+        
+        if (PIND.3)
+        {
+           butt1=0;
+        }  
+        
+        if (PIND.4)
+        {
+           butt2=0;
+        }
+        
+        
+       // ShowDigit(counter); 
+       // LCD_command(0xc0);
+        if((butt2==1)||(butt1==1)) delay_ms(300); */  
+                                    
+    }
+}

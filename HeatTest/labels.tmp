@@ -1,0 +1,31 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.12</VERSION>
+ <DEVICE>ATmega644</DEVICE>
+ <WORKING_DIR>D:\AVRProgs\HeatTest</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>D:\AVRProgs\HeatTest\HeatTest.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m644def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>D:\AVRProgs\HeatTest\HeatTest.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>D:\AVRProgs\HeatTest\HeatTest.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>D:\AVRProgs\HeatTest\HeatTest.map</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <reset><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>11</LINE></reset>
+  <timer1><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>40</LINE></timer1>
+  <main><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>32</LINE></main>
+  <light><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>47</LINE></light>
+  <exit><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>49</LINE></exit>
+  <Delay><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>52</LINE></Delay>
+  <delay1><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>54</LINE></delay1>
+  <delay2><FILE>D:\AVRProgs\HeatTest\HeatTest.asm</FILE><LINE>55</LINE></delay2>
+ </LABELS>
+</ASSEMBLER_INFO>
